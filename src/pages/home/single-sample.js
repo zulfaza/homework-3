@@ -12,6 +12,16 @@ const data = {
         type: "artist",
         uri: "spotify:artist:1dfeR4HaWDbWqFHLkxsg1d",
       },
+      {
+        external_urls: {
+          spotify: "https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d",
+        },
+        href: "https://api.spotify.com/v1/artists/1dfeR4HaWDbWqFHLkxsg1d",
+        id: "1dfeR4HaWDbWqFHLkxsg1e",
+        name: "King",
+        type: "artist",
+        uri: "spotify:artist:1dfeR4HaWDbWqFHLkxsg1d",
+      },
     ],
     external_urls: {
       spotify: "https://open.spotify.com/album/6i6folBtxKV28WX3msQ4FE",
