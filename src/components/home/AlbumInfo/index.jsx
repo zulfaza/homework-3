@@ -25,17 +25,20 @@ const AlbumInfo = ({ data }) => {
               {album.name}
             </a>
           </h6>
-          <p className="mt-1 text-sm text-gray-500 flex divide-gray-400 divide-x">
-            {data.artists.map((artis) => (
-              <a
-                key={artis.id}
-                href={artis.external_urls.spotify}
-                target="_blank"
-                className="px-2 first:pl-0"
-                rel="noopener noreferrer"
-              >
-                {artis.name}
-              </a>
+          <p className="mt-1 text-sm text-gray-500 flex items-start flex-wrap">
+            {data.artists.map((artis, index, arr) => (
+              <>
+                <a
+                  key={artis.id}
+                  href={artis.external_urls.spotify}
+                  target="_blank"
+                  className=""
+                  rel="noopener noreferrer"
+                >
+                  {artis.name}
+                </a>
+                {index !== arr.length - 1 && ","}
+              </>
             ))}
           </p>
         </div>
