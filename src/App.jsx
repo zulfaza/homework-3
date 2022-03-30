@@ -6,11 +6,11 @@ import getQueryParams from "./utils/getQueryParams";
 
 class App extends Component {
   state = {
-    accessToken:
-      '"BQAlMuR-wjEQ0STDnRPO5vL_Z34mKtMuIY-VnjY5Z4e18kjPMCUP0ZUso5N3Yl8-zglDFMII1n1sG75nc16DhJWcOia1YYhJ_6Cm_de5Z6hLEZJI6LlO4Gjc7JDFzK0oEyF5GDdgV1RyERVUq2sEWQ19zQiuSUfYTRsXilcGx-5mYgiGGOQ8WZtPyfQFRJw"',
+    accessToken: null,
   };
 
   componentDidMount() {
+    console.log(getQueryParams(window.location.hash));
     const { access_token = null } = getQueryParams(window.location.hash);
     if (access_token) this.setState({ accessToken: access_token });
   }
