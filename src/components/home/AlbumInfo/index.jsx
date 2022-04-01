@@ -2,11 +2,10 @@ import React from "react";
 
 const AlbumInfo = ({ data, tracks, setTracks }) => {
   const album = data.album;
-
   const handleSelectClick = () => {
     if (tracks.includes(data.id))
-      setTracks((prev) => prev.filter((id) => id !== data.id));
-    else setTracks((prev) => [...prev, data.id]);
+      setTracks((prev) => prev.filter((uri) => uri !== data.uri));
+    else setTracks((prev) => [...prev, data.uri]);
   };
 
   return (
@@ -47,10 +46,10 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
           <button
             onClick={handleSelectClick}
             className={`${
-              !tracks.includes(data.id) ? "bg-blue-400" : "bg-red-500"
+              !tracks.includes(data.uri) ? "bg-blue-400" : "bg-red-500"
             } px-5 py-2 text-white w-full`}
           >
-            {tracks.includes(data.id) ? "Deselect" : "Select"}
+            {tracks.includes(data.uri) ? "Deselect" : "Select"}
           </button>
         </div>
       </div>
