@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import AlbumInfo from "../../components/home/AlbumInfo";
 import formatParameter from "../../utils/formatParameter";
+import ModalCreatePlaylist from "./modal-create-playlist";
 // import albums from "./albums";
 
 const Home = ({ accessToken }) => {
   const [Albums, setAlbums] = useState([]);
   const [Keyword, setKeyword] = useState(null);
   const [SelectedTracks, setSelectedTracks] = useState([]);
-
+  const [ShowCreatePlaylist, setShowCreatePlaylist] = useState(false);
+  const [Success, setSuccess] = useState(null);
   const Search = async (e) => {
     e.preventDefault();
     const Authorization = `Bearer ${accessToken}`;
@@ -35,6 +37,11 @@ const Home = ({ accessToken }) => {
         <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
           Home
         </h2>
+        {Success && (
+          <div className="px-4 py-2 rounded w-full text-black bg-green-500">
+            {Success}
+          </div>
+        )}
         <form onSubmit={Search} className="my-4 flex gap-3">
           <input
             onChange={(e) => setKeyword(e.target.value)}
@@ -45,6 +52,20 @@ const Home = ({ accessToken }) => {
             Search
           </button>
         </form>
+        <button
+          disabled={SelectedTracks.length < 1}
+          onClick={() => setShowCreatePlaylist(true)}
+          className="bg-blue-500 disabled:opacity-50 px-4 py-2 text-white rounded"
+        >
+          Buat Playlist
+        </button>
+        <ModalCreatePlaylist
+          tracks={SelectedTracks}
+          isOpen={ShowCreatePlaylist}
+          setIsOpen={setShowCreatePlaylist}
+          accessToken={accessToken}
+          setSuccess={setSuccess}
+        />
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {Albums.map((data) => (
             <AlbumInfo
