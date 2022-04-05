@@ -1,35 +1,39 @@
-import { Component } from "react";
+import { useEffect } from "react";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import store from "./redux/store";
 import getQueryParams from "./utils/getQueryParams";
 
-class App extends Component {
-  state = {
-    accessToken: null,
-  };
+import React from "react";
+import { updateAccessToken } from "./redux/slice";
 
-  componentDidMount() {
-    console.log(getQueryParams(window.location.hash));
+const App = () => {
+  const dispatch = useDispatch();
+  const accessToken = useSelector((state) => state.spotify.accessToken);
+
+  useEffect(() => {
     const { access_token = null } = getQueryParams(window.location.hash);
-    if (access_token) this.setState({ accessToken: access_token });
-  }
+    if (access_token) dispatch(updateAccessToken(access_token));
+  }, [dispatch]);
 
-  render() {
-    const { accessToken = null } = this.state;
-    if (accessToken)
-      return (
-        <div className="App">
-          <Home accessToken={accessToken} />
-        </div>
-      );
-
+  if (accessToken)
     return (
+      <Provider store={store}>
+        <div className="App">
+          <Home />
+        </div>
+      </Provider>
+    );
+
+  return (
+    <Provider store={store}>
       <div className="App">
         <Login />
       </div>
-    );
-  }
-}
+    </Provider>
+  );
+};
 
 export default App;

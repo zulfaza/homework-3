@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import AlbumInfo from "../../components/home/AlbumInfo";
 import formatParameter from "../../utils/formatParameter";
 import ModalCreatePlaylist from "./modal-create-playlist";
 // import albums from "./albums";
 
-const Home = ({ accessToken }) => {
+const Home = () => {
+  const accessToken = useSelector((state) => state.spotify.accessToken);
   const [Albums, setAlbums] = useState([]);
   const [Keyword, setKeyword] = useState(null);
   const [SelectedTracks, setSelectedTracks] = useState([]);
   const [ShowCreatePlaylist, setShowCreatePlaylist] = useState(false);
   const [Success, setSuccess] = useState(null);
+
   const Search = async (e) => {
     e.preventDefault();
     const Authorization = `Bearer ${accessToken}`;
