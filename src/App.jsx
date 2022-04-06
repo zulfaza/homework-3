@@ -1,9 +1,8 @@
 import { useEffect } from "react";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Home from "./pages/home";
 import Login from "./pages/login";
-import store from "./redux/store";
 import getQueryParams from "./utils/getQueryParams";
 
 import React from "react";
@@ -20,19 +19,15 @@ const App = () => {
 
   if (accessToken)
     return (
-      <Provider store={store}>
-        <div className="App">
-          <Home />
-        </div>
-      </Provider>
+      <div className="App">
+        <Home />
+      </div>
     );
 
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Login />
-      </div>
-    </Provider>
+    <div className="App">
+      <Login />
+    </div>
   );
 };
 
