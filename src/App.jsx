@@ -17,18 +17,7 @@ const App = () => {
     if (access_token) dispatch(updateAccessToken(access_token));
   }, [dispatch]);
 
-  if (accessToken)
-    return (
-      <div className="App">
-        <Home />
-      </div>
-    );
-
-  return (
-    <div className="App">
-      <Login />
-    </div>
-  );
+  return <div className="App">{accessToken ? <Home /> : <Login />}</div>;
 };
 
 export default App;
