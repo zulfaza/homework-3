@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import AlbumInfo from "../../components/home/AlbumInfo";
 import formatParameter from "../../utils/formatParameter";
 import ModalCreatePlaylist from "./modal-create-playlist";
@@ -12,7 +13,7 @@ const Home = () => {
   const [SelectedTracks, setSelectedTracks] = useState([]);
   const [ShowCreatePlaylist, setShowCreatePlaylist] = useState(false);
   const [Success, setSuccess] = useState(null);
-
+  const history = useHistory();
   const Search = async (e) => {
     e.preventDefault();
     const Authorization = `Bearer ${accessToken}`;
@@ -33,6 +34,10 @@ const Home = () => {
         setAlbums(res.tracks.items);
       });
   };
+
+  useEffect(() => {
+    if (!accessToken) history.push("/");
+  }, [accessToken, history]);
 
   return (
     <div className="bg-white">
