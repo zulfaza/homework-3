@@ -9,6 +9,9 @@ import React from "react";
 import { updateAccessToken } from "./redux/slice";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UserOnlyRoute from "./components/routes/UserOnlyRoute";
+import GuestOnlyRoute from "./components/routes/GuestOnlyRoute";
+import Error404 from "./pages/404";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,8 +25,9 @@ const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/create-playlist" component={Home}></Route>
-          <Route path="/" component={Login}></Route>
+          <UserOnlyRoute path="/create-playlist" component={Home} />
+          <GuestOnlyRoute exact path="/" component={Login} />
+          <Route path="*" component={Error404} />
         </Switch>
       </Router>
     </div>
