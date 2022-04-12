@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const AlbumInfo = ({ data, tracks, setTracks }) => {
   const album = data.album;
   const handleSelectClick = () => {
-    if (tracks.includes(data.id))
-      setTracks((prev) => prev.filter((uri) => uri !== data.uri));
+    if (tracks.includes(data.id)) setTracks((prev) => prev.filter((uri) => uri !== data.uri));
     else setTracks((prev) => [...prev, data.uri]);
   };
 
@@ -17,7 +16,7 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
           className="w-full h-full object-center object-cover lg:w-full lg:h-full"
         />
       </div>
-      <div className="mt-4 flex flex-col h-full">
+      <div className="data-wrapper">
         <div className="self-stretch">
           <h3 className="text-xl text-gray-700 truncate">
             <a href={data.external_urls.spotify}>{data.name}</a>
@@ -37,7 +36,7 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
                 >
                   {artis.name}
                 </a>
-                {index !== arr.length - 1 && ","}
+                {index !== arr.length - 1 && ','}
               </span>
             ))}
           </p>
@@ -45,14 +44,21 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
         <div className="my-3">
           <button
             onClick={handleSelectClick}
-            className={`${
-              !tracks.includes(data.uri) ? "bg-blue-400" : "bg-red-500"
-            } px-5 py-2 text-white w-full`}
+            className={`${!tracks.includes(data.uri) ? 'bg-blue-400' : 'bg-red-500'} px-5 py-2 text-white w-full`}
           >
-            {tracks.includes(data.uri) ? "Deselect" : "Select"}
+            {tracks.includes(data.uri) ? 'Deselect' : 'Select'}
           </button>
         </div>
       </div>
+      <style jsx>{`
+        .data-wrapper {
+          display: flex;
+          margin-top: 1rem;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+      `}</style>
     </div>
   );
 };

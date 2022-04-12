@@ -1,16 +1,15 @@
-import { useDispatch } from "react-redux";
-import "./App.css";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import getQueryParams from "./utils/getQueryParams";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import React, { useEffect } from "react";
-import { updateAccessToken } from "./redux/slice";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UserOnlyRoute from "./components/routes/UserOnlyRoute";
-import GuestOnlyRoute from "./components/routes/GuestOnlyRoute";
-import Error404 from "./pages/404";
+import { useDispatch } from 'react-redux';
+import './App.css';
+import Home from './pages/home';
+import Login from './pages/login';
+import getQueryParams from './utils/getQueryParams';
+import { updateAccessToken } from './redux/slice';
+import UserOnlyRoute from './components/routes/UserOnlyRoute';
+import GuestOnlyRoute from './components/routes/GuestOnlyRoute';
+import Error404 from './pages/404';
 
 const App = () => {
   const dispatch = useDispatch();
