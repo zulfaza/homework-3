@@ -16,7 +16,7 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
           className="w-full h-full object-center object-cover lg:w-full lg:h-full"
         />
       </div>
-      <div className="data-wrapper">
+      <div className="mt-4 flex flex-col h-full">
         <div className="self-stretch">
           <h3 className="text-xl text-gray-700 truncate">
             <a href={data.external_urls.spotify}>{data.name}</a>
@@ -50,15 +50,6 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
           </button>
         </div>
       </div>
-      <style jsx>{`
-        .data-wrapper {
-          display: flex;
-          margin-top: 1rem;
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-        }
-      `}</style>
     </div>
   );
 };
