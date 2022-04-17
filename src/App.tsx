@@ -11,11 +11,15 @@ import UserOnlyRoute from './components/routes/UserOnlyRoute';
 import GuestOnlyRoute from './components/routes/GuestOnlyRoute';
 import Error404 from './pages/404';
 
+type paramType = {
+  [key: string]: string;
+};
+
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { access_token = null } = getQueryParams(window.location.hash);
+    const { access_token = null } = getQueryParams(window.location.hash) as paramType;
     if (access_token) dispatch(updateAccessToken(access_token));
   }, [dispatch]);
 
@@ -23,9 +27,15 @@ const App = () => {
     <div className="App">
       <Router>
         <Switch>
-          <UserOnlyRoute path="/create-playlist" component={Home} />
-          <GuestOnlyRoute exact path="/" component={Login} />
-          <Route path="*" component={Error404} />
+          <UserOnlyRoute path="/create-playlist">
+            <Home />
+          </UserOnlyRoute>
+          <GuestOnlyRoute exact path="/">
+            <Login />
+          </GuestOnlyRoute>
+          <Route path="*">
+            <Error404 />
+          </Route>
         </Switch>
       </Router>
     </div>

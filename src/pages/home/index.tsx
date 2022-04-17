@@ -1,18 +1,89 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import AlbumInfo from '../../components/home/AlbumInfo';
-import formatParameter from '../../utils/formatParameter';
+import { selectorProps } from 'redux/store';
+import AlbumInfo from 'components/home/AlbumInfo';
+import formatParameter from 'utils/formatParameter';
 import ModalCreatePlaylist from './modal-create-playlist';
 // import albums from "./albums";
 
+export interface TrackType {
+  album: Album;
+  artists: Artist[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_ids: ExternalIDS;
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  is_local: boolean;
+  name: string;
+  popularity: number;
+  preview_url: null | string;
+  track_number: number;
+  type: TrackTypeType;
+  uri: string;
+}
+
+export interface Album {
+  artists: Artist[];
+  available_markets: string[];
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  release_date: string;
+  release_date_precision: ReleaseDatePrecision;
+  total_tracks: number;
+  uri: string;
+}
+
+export interface Artist {
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  name: string;
+  type: ArtistType;
+  uri: string;
+}
+
+export interface ExternalUrls {
+  spotify: string;
+}
+
+export enum ArtistType {
+  Artist = 'artist',
+}
+
+export interface Image {
+  height: number;
+  url: string;
+  width: number;
+}
+
+export enum ReleaseDatePrecision {
+  Day = 'day',
+}
+
+export interface ExternalIDS {
+  isrc: string;
+}
+
+export enum TrackTypeType {
+  Track = 'track',
+}
+
 const Home = () => {
-  const accessToken = useSelector((state) => state.spotify.accessToken);
-  const [Albums, setAlbums] = useState([]);
-  const [Keyword, setKeyword] = useState(null);
-  const [SelectedTracks, setSelectedTracks] = useState([]);
+  const accessToken = useSelector((state: selectorProps) => state.spotify.accessToken);
+  const [Albums, setAlbums] = useState<TrackType[]>([]);
+  const [Keyword, setKeyword] = useState<string | null>(null);
+  const [SelectedTracks, setSelectedTracks] = useState<string[]>([]);
   const [ShowCreatePlaylist, setShowCreatePlaylist] = useState(false);
   const [Success, setSuccess] = useState(null);
-  const Search = async (e) => {
+
+  const Search = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const Authorization = `Bearer ${accessToken}`;
     fetch(
@@ -62,26 +133,6 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <style jsx>{`
-        .album-info-wrapperr {
-          display: grid;
-          margin-top: 1.5rem;
-          grid-template-columns: repeat(1, minmax(0, 1fr));
-          column-gap: 1.5rem;
-          row-gap: 2.5rem;
-
-          @media (min-width: 640px) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-
-          @media (min-width: 1024px) {
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-          }
-          @media (min-width: 1280px) {
-            column-gap: 2rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };

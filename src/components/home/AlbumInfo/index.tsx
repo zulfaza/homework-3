@@ -1,11 +1,20 @@
+import { TrackType } from 'pages/home';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const AlbumInfo = ({ data, tracks, setTracks }) => {
+type Props = {
+  data: TrackType;
+  tracks: string[];
+  setTracks: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+const AlbumInfo = ({ data, tracks, setTracks }: Props) => {
   const album = data.album;
-  const handleSelectClick = () => {
-    if (tracks.includes(data.id)) setTracks((prev) => prev.filter((uri) => uri !== data.uri));
-    else setTracks((prev) => [...prev, data.uri]);
+  const handleSelectClick = (uri: string) => {
+    if (tracks.includes(uri)) setTracks((prev) => prev.filter((inTrackUri) => inTrackUri !== uri));
+    else setTracks((prev) => [...prev, uri]);
   };
+  const url: string | null = 'alkdfjajsdl';
 
   return (
     <div className="group relative h-full self-stretch">
@@ -36,14 +45,14 @@ const AlbumInfo = ({ data, tracks, setTracks }) => {
                 >
                   {artis.name}
                 </a>
-                {index !== arr.length - 1 && ','}
+                {index !== arr.length - 1 && <span className="mr-1">,</span>}
               </span>
             ))}
           </p>
         </div>
         <div className="my-3">
           <button
-            onClick={handleSelectClick}
+            onClick={() => handleSelectClick(data.uri)}
             className={`${!tracks.includes(data.uri) ? 'bg-blue-400' : 'bg-red-500'} px-5 py-2 text-white w-full`}
           >
             {tracks.includes(data.uri) ? 'Deselect' : 'Select'}

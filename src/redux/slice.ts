@@ -1,15 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export type reducerState = {
+  accessToken: string | null;
+};
+
+const initialState: reducerState = {
+  accessToken: null,
+};
+
 export const inputSlice = createSlice({
   name: 'spotify',
-  initialState: {
-    accessToken: null,
-  },
+  initialState,
   reducers: {
     updateAccessToken: (state, action) => {
-      const newState = { ...state };
-      newState.accessToken = action.payload;
-      return newState;
+      return { ...state, accessToken: action.payload };
     },
   },
 });
