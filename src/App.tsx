@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import './App.css';
@@ -25,19 +25,17 @@ const App = () => {
 
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <UserOnlyRoute path="/create-playlist">
-            <Home />
-          </UserOnlyRoute>
-          <GuestOnlyRoute exact path="/">
-            <Login />
-          </GuestOnlyRoute>
-          <Route path="*">
-            <Error404 />
-          </Route>
-        </Switch>
-      </Router>
+      <Switch>
+        <UserOnlyRoute path="/create-playlist">
+          <Home />
+        </UserOnlyRoute>
+        <GuestOnlyRoute exact path="/">
+          <Login />
+        </GuestOnlyRoute>
+        <Route path="*">
+          <Error404 />
+        </Route>
+      </Switch>
     </div>
   );
 };

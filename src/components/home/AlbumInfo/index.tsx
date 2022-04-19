@@ -17,7 +17,7 @@ const AlbumInfo = ({ data, tracks, setTracks }: Props) => {
   const url: string | null = 'alkdfjajsdl';
 
   return (
-    <div className="group relative h-full self-stretch">
+    <div data-testid="album-info" className="group relative h-full self-stretch">
       <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
         <img
           src={album.images[0].url}
