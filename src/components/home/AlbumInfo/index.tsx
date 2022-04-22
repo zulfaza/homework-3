@@ -14,7 +14,6 @@ const AlbumInfo = ({ data, tracks, setTracks }: Props) => {
     if (tracks.includes(uri)) setTracks((prev) => prev.filter((inTrackUri) => inTrackUri !== uri));
     else setTracks((prev) => [...prev, uri]);
   };
-  const url: string | null = 'alkdfjajsdl';
 
   return (
     <div data-testid="album-info" className="group relative h-full self-stretch">

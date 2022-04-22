@@ -20,8 +20,10 @@ test('try to access guest page with token and search', async () => {
   });
   expect(window.location.pathname).toStrictEqual('/create-playlist');
   // screen.debug();
-  const input = screen.getByRole('textbox');
+  
   const btnSearch = screen.getByText('Search');
+  expect(input).toBeInTheDocument();
+  expect(btnSearch).toBeInTheDocument();
   userEvent.type(input, '88rising');
   userEvent.click(btnSearch);
   await waitFor(() => {
